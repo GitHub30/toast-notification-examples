@@ -382,3 +382,32 @@ $XmlDocument.loadXml($xml)
 $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
+
+## Friend request
+![image](https://user-images.githubusercontent.com/12811398/184501497-61aea9a2-7391-43eb-8c95-92f8e9cbae25.png)
+
+```powershell
+$xml = @"
+<toast launch="action=viewFriendRequest&amp;userId=49183">
+
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Matt sent you a friend request</text>
+      <text>Hey, wanna dress up as wizards and ride around on our hoverboards together?</text>
+      <image placement="appLogoOverride" hint-crop="circle" src="C:\Windows\IdentityCRL\WLive48x48.png"/>
+    </binding>
+  </visual>
+
+  <actions>
+    <action content="Accept" activationType="background" arguments="action=acceptFriendRequest&amp;userId=49183"/>
+    <action content="Decline" activationType="background" arguments="action=declineFriendRequest&amp;userId=49183"/>
+  </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
