@@ -216,3 +216,31 @@ $XmlDocument.loadXml($xml)
 $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
+
+## Hero image `placement="hero"`
+![image](https://user-images.githubusercontent.com/12811398/184500761-fd9b58a9-b51d-4909-b4f1-cf6e4c99edcc.png)
+
+```powershell
+$headlineText = 'One string of bold text on the first line.'
+$bodyText = 'One string of regular text on the second line.'
+$logo = 'C:\Windows\IdentityCRL\WLive48x48.png'
+$image = 'C:\Windows\Web\Screen\img100.jpg'
+
+$xml = @"
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+            <text>$($headlineText)</text>
+            <text>$($bodyText)</text>
+            <image placement="appLogoOverride" src="$($logo)"/>
+            <image placement="hero" src="$($image)"/>
+        </binding>
+    </visual>
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
