@@ -244,3 +244,24 @@ $XmlDocument.loadXml($xml)
 $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
+
+## Basic
+![image](https://user-images.githubusercontent.com/12811398/184501065-133d97bb-6526-4f89-a6c2-b416cc4a58ab.png)
+
+```powershell
+$xml = @"
+<toast>
+    <visual>
+        <binding template="ToastGeneric">
+        <text>Hello World</text>
+        <text>This is a simple toast message</text>
+        </binding>
+    </visual>
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
