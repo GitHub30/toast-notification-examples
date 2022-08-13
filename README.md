@@ -148,7 +148,7 @@ The [image](https://msdn.microsoft.com/en-us/library/BR230844) is expressed usin
 
   A local image. (Only supported for desktop apps.)
 
-## New line
+## New line `` `n ``
 ![image](https://user-images.githubusercontent.com/12811398/184498520-09fc7de9-cb9f-4b46-82fc-d3117c9eed20.png)
 
 ```powershell
