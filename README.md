@@ -337,3 +337,48 @@ $XmlDocument.loadXml($xml)
 $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
+
+## Event invite
+![image](https://user-images.githubusercontent.com/12811398/184501365-3c125a67-a7d3-45d1-aeed-3b136891d434.png)
+![image](https://user-images.githubusercontent.com/12811398/184501378-af4599a2-287c-493c-8b59-078e94c1bfec.png)
+
+```powershell
+$xml = @"
+<toast launch="action=viewEvent&amp;eventId=63851">
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Surface Launch Party</text>
+      <text>Studio S / Ballroom</text>
+      <text>4:00 PM, 10/26/2015</text>
+    </binding>
+  </visual>
+
+  <actions>
+    
+    <input id="status" type="selection" defaultInput="yes">
+      <selection id="yes" content="Going"/>
+      <selection id="maybe" content="Maybe"/>
+      <selection id="no" content="Decline"/>
+    </input>
+
+    <action
+      activationType="background"
+      arguments="action=rsvpEvent&amp;eventId=63851"
+      content="RSVP"/>
+
+    <action
+      activationType="system"
+      arguments="dismiss"
+      content=""/>
+    
+  </actions>
+  
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
