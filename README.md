@@ -147,3 +147,16 @@ The [image](https://msdn.microsoft.com/en-us/library/BR230844) is expressed usin
 - file:///
 
   A local image. (Only supported for desktop apps.)
+
+## New line
+![image](https://user-images.githubusercontent.com/12811398/184498520-09fc7de9-cb9f-4b46-82fc-d3117c9eed20.png)
+
+```powershell
+$bodyText = "ASCII.JP`nWindows Info"
+
+$ToastText01 = [Windows.UI.Notifications.ToastTemplateType, Windows.UI.Notifications, ContentType = WindowsRuntime]::ToastText01
+$TemplateContent = [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::GetTemplateContent($ToastText01)
+$TemplateContent.SelectSingleNode('//text[@id="1"]').InnerText = $bodyText
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($TemplateContent)
+```
