@@ -251,12 +251,14 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 ```powershell
 $xml = @"
 <toast>
-    <visual>
-        <binding template="ToastGeneric">
-        <text>Hello World</text>
-        <text>This is a simple toast message</text>
-        </binding>
-    </visual>
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Hello World</text>
+      <text>This is a simple toast message</text>
+    </binding>
+  </visual>
+  
 </toast>
 "@
 [void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
@@ -302,6 +304,30 @@ $xml = @"
       content="Dismiss"/>
 
   </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
+## Breaking news
+![image](https://user-images.githubusercontent.com/12811398/184501258-88141d56-fc97-43c9-ad63-02849a483039.png)
+
+```powershell
+$xml = @"
+<toast launch="action=viewStory&amp;storyId=92187">
+
+    <visual>
+        <binding template="ToastGeneric">
+            <text>Tortoise beats rabbit in epic race</text>
+            <text>In a surprising turn of events, Rockstar Rabbit took a nasty crash, allowing Thomas the Tortoise to win the race.</text>
+            <text placement="attribution">The Animal Times</text>
+        </binding>
+    </visual>
 
 </toast>
 "@
