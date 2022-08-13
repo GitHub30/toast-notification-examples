@@ -62,24 +62,6 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($TemplateContent)
 ```
 
-The [image](https://msdn.microsoft.com/en-us/library/BR230844) is expressed using one of these protocols:
-
-- http:// or https://
-
-  A web-based image.
-
-- ms-appx:///
-
-  An image included in the app package.
-
-- ms-appdata:///local/
-
-  An image saved to local storage.
-
-- file:///
-
-  A local image. (Only supported for desktop apps.)
-
 ## [ToastImageAndText01](https://docs.microsoft.com/en-us/previous-versions/windows/apps/hh761494(v=win.10)#toastimageandtext01)
 ![image](https://user-images.githubusercontent.com/12811398/184498101-a7531a6d-70aa-404d-b4f3-dc5631b48631.png)
 
@@ -147,3 +129,21 @@ $TemplateContent.SelectSingleNode('//text[@id="3"]').InnerText = $bodyText2
 $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($TemplateContent)
 ```
+
+The [image](https://msdn.microsoft.com/en-us/library/BR230844) is expressed using one of these protocols:
+
+- http:// or https://
+
+  A web-based image.
+
+- ms-appx:///
+
+  An image included in the app package.
+
+- ms-appdata:///local/
+
+  An image saved to local storage.
+
+- file:///
+
+  A local image. (Only supported for desktop apps.)
