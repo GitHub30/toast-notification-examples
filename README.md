@@ -161,7 +161,7 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($TemplateContent)
 ```
 
-## Logo image
+## Logo image `placement="appLogoOverride"`
 ![image](https://user-images.githubusercontent.com/12811398/184499812-2503630c-4bdd-4d75-9406-ce9db00125de.png)
 
 ```powershell
