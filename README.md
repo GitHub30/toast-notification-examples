@@ -130,24 +130,6 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Show($TemplateContent)
 ```
 
-The [image](https://msdn.microsoft.com/en-us/library/BR230844) is expressed using one of these protocols:
-
-- http:// or https://
-
-  A web-based image.
-
-- ms-appx:///
-
-  An image included in the app package.
-
-- ms-appdata:///local/
-
-  An image saved to local storage.
-
-- file:///
-
-  A local image. (Only supported for desktop apps.)
-
 ## New line `` `n ``
 ![image](https://user-images.githubusercontent.com/12811398/184498520-09fc7de9-cb9f-4b46-82fc-d3117c9eed20.png)
 
