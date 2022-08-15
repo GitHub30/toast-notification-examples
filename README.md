@@ -864,6 +864,17 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## No content
+![image](https://user-images.githubusercontent.com/12811398/184665839-3f812765-346f-418d-b495-1b12e1cf0a67.png)
+
+```powershell
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml('<toast></toast>')
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
