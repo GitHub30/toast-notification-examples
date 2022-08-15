@@ -875,6 +875,9 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Listening to events
+https://github.com/PowerShell/PowerShell/issues/2181
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
