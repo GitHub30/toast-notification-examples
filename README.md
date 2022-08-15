@@ -655,6 +655,53 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Restrant
+![image](https://user-images.githubusercontent.com/12811398/184657839-68edfc06-e199-450c-a035-3bf20243a363.png)
+
+```powershell
+$xml = @"
+<toast launch="action=viewRestaurant&amp;restaurantId=92187">
+
+    <visual>
+        <binding template="ToastGeneric">
+            <image placement="hero" src="https://storage.googleapis.com/rppico.appspot.com/Food1.jpg"/>
+            <text hint-maxLines="1">New suggested restaurant</text>
+            <text>There's a popular chinese restaurant near you that we think you'd like!</text>
+            <image src="https://storage.googleapis.com/rppico.appspot.com/RestaurantMap.jpg"/>
+            <group>
+                <subgroup>
+                    <text hint-style="body">Pho Licious</text>
+                    <text hint-style="captionSubtle">4.6 stars</text>
+                </subgroup>
+                <subgroup hint-textStacking="bottom">
+                    <text hint-style="captionSubtle" hint-wrap="true" hint-align="right">4018 148th Ave NE, Redmond, WA 98052</text>
+                </subgroup>
+            </group>
+        </binding>
+    </visual>
+
+    <actions>
+
+        <action
+          content="Map"
+          arguments="bingmaps:?q=4018 148th Ave NE, Redmond, WA 98052"
+          activationType="protocol"/>
+
+        <action
+          content="Reviews"
+          arguments="action=viewRestaurantReviews&amp;restaurantId=92187"/>
+
+    </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
