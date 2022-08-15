@@ -542,7 +542,6 @@ $AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
 ## Progress bar
 ![image](https://user-images.githubusercontent.com/12811398/184655641-78e7032f-526f-4cac-b2c4-62ecdb070d8a.gif)
 
-
 ```powershell
 $xml = @"
 <toast launch="action=viewDownload&amp;downloadId=9438108">
