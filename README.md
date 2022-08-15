@@ -581,8 +581,8 @@ $ToastNotification = [Windows.UI.Notifications.ToastNotification]::New($XmlDocum
 $ToastNotification.Tag = 'my_tag'
 $Dictionary = [System.Collections.Generic.Dictionary[String, String]]::New()
 $Dictionary.Add('progressTitle', 'YouTube')
-$Dictionary.Add('progressValue', '')
-$Dictionary.Add('progressValueString', '')
+$Dictionary.Add('progressValue', '0')
+$Dictionary.Add('progressValueString', '0/15 videos')
 $Dictionary.Add('progressStatus', 'Downloading...')
 $ToastNotification.Data = [Windows.UI.Notifications.NotificationData]::New($Dictionary)
 $ToastNotification.Data.SequenceNumber = 1
