@@ -501,6 +501,44 @@ $AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Photo tagged
+![image](https://user-images.githubusercontent.com/12811398/184646358-96a4d36d-aad2-4f48-a2fc-a80f63a49aae.png)
+
+```powershell
+$xml = @"
+<toast launch="action=viewPhoto&amp;photoId=92187">
+
+  <visual>
+    <binding template="ToastGeneric">
+      <image placement="appLogoOverride" hint-crop="circle" src="https://unsplash.it/64?image=669"/>
+      <text>Adam Wilson tagged you in a photo</text>
+      <text>On top of McClellan Butte - with Andrew Bares</text>
+      <image src="https://unsplash.it/360/202?image=883"/>
+    </binding>
+  </visual>
+
+  <actions>
+
+    <action
+      content="Like"
+      activationType="background"
+      arguments="likePhoto&amp;photoId=92187"/>
+    
+    <action
+      content="Comment"
+      arguments="action=commentPhoto&amp;photoId=92187"/>
+    
+  </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
