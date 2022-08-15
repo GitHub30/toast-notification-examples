@@ -293,6 +293,31 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Loop audio
+![image](https://user-images.githubusercontent.com/12811398/184664280-a2e08b5c-e48a-47b8-912b-700802f0a96d.png)
+
+```powershell
+$xml = @"
+<toast>
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Hello World</text>
+      <text>This is a simple toast message</text>
+    </binding>
+  </visual>
+
+  <audio src="ms-winsoundevent:Notification.Reminder" loop="true"/>
+  
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 ## Alarm
 ![image](https://user-images.githubusercontent.com/12811398/184501154-a238869f-beae-486b-a465-a4dfa8d7212b.png)
 ![image](https://user-images.githubusercontent.com/12811398/184501167-126f8472-d9cc-4556-9224-ae5dd1b4d5c4.png)
