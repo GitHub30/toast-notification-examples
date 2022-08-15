@@ -412,6 +412,57 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Incoming call
+![image](https://user-images.githubusercontent.com/12811398/184645411-5e9391d1-897a-4f63-9b95-7f6e00a302f9.png)
+
+```powershell
+$xml = @"
+<toast launch="action=answer&amp;callId=938163" scenario="incomingCall">
+
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Andrew Bares</text>
+      <text>Incoming Call - Mobile</text>
+      <image hint-crop="circle" src="https://unsplash.it/100?image=883"/>
+    </binding>
+  </visual>
+
+  <actions>
+
+    <action
+      content="Text reply"
+      imageUri="https://storage.googleapis.com/rppico.appspot.com/message.png"
+      activationType="foreground"
+      arguments="action=textReply&amp;callId=938163"/>
+
+    <action
+      content="Reminder"
+      imageUri="https://storage.googleapis.com/rppico.appspot.com/reminder.png"
+      activationType="background"
+      arguments="action=reminder&amp;callId=938163"/>
+
+    <action
+      content="Ignore"
+      imageUri="https://storage.googleapis.com/rppico.appspot.com/cancel.png"
+      activationType="background"
+      arguments="action=ignore&amp;callId=938163"/>
+
+    <action
+      content="Answer"
+      imageUri="https://storage.googleapis.com/rppico.appspot.com/telephone.png"
+      arguments="action=answer&amp;callId=938163"/>
+
+  </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
