@@ -328,6 +328,28 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Open link
+![image](https://user-images.githubusercontent.com/12811398/184736015-b54756d0-d521-4193-afea-d459e3a88f43.png)
+
+```powershell
+$xml = @"
+<toast activationType="protocol" launch="https://www.google.com/" >
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Click to open Google</text>
+    </binding>
+  </visual>
+  
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 ## Open link when button is clicked
 ![image](https://user-images.githubusercontent.com/12811398/184735491-05f13e37-c089-4300-b880-f58e5cdb6f77.png)
 
