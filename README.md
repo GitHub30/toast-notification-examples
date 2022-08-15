@@ -757,6 +757,31 @@ $AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Download Finished
+![image](https://user-images.githubusercontent.com/12811398/184659716-5f717351-d4a7-4de2-aec7-1fae31042d0d.png)
+
+```powershell
+$xml = @"
+<toast>
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Music Player</text>
+      <text>Download Finished</text>
+    </binding>
+  </visual>
+  <actions>
+    <action content="Play" activationType="protocol" arguments="C:\Windows\Media\Alarm01.wav" />
+    <action content="Open Folder" activationType="protocol" arguments="file:///C:/Windows/Media" />
+  </actions>
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
