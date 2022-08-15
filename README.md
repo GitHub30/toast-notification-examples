@@ -702,6 +702,61 @@ $AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Weather
+![image](https://user-images.githubusercontent.com/12811398/184658678-f99094fe-0fbe-4eb0-a9ec-026ee497c388.png)
+
+```powershell
+$xml = @"
+<toast>
+
+    <visual baseUri="https://storage.googleapis.com/rppico.appspot.com/">
+        <binding template="ToastGeneric">
+            <text>Today will be sunny with a high of 63 and a low of 42.</text>
+
+            <group>
+                <subgroup hint-weight="1">
+                    <text hint-align="center">Mon</text>
+                    <image src="Mostly Cloudy.png" hint-removeMargin="true"/>
+                    <text hint-align="center">63°</text>
+                    <text hint-style="captionsubtle" hint-align="center">42°</text>
+                </subgroup>
+                <subgroup hint-weight="1">
+                    <text hint-align="center">Tue</text>
+                    <image src="Cloudy.png" hint-removeMargin="true"/>
+                    <text hint-align="center">57°</text>
+                    <text hint-style="captionsubtle" hint-align="center">38°</text>
+                </subgroup>
+                <subgroup hint-weight="1">
+                    <text hint-align="center">Wed</text>
+                    <image src="Sunny.png" hint-removeMargin="true"/>
+                    <text hint-align="center">59°</text>
+                    <text hint-style="captionsubtle" hint-align="center">43°</text>
+                </subgroup>
+                <subgroup hint-weight="1">
+                    <text hint-align="center">Thu</text>
+                    <image src="Sunny.png" hint-removeMargin="true"/>
+                    <text hint-align="center">62°</text>
+                    <text hint-style="captionsubtle" hint-align="center">42°</text>
+                </subgroup>
+                <subgroup hint-weight="1">
+                    <text hint-align="center">Fri</text>
+                    <image src="Sunny.png" hint-removeMargin="true"/>
+                    <text hint-align="center">71°</text>
+                    <text hint-style="captionsubtle" hint-align="center">66°</text>
+                </subgroup>
+            </group>
+        </binding>
+    </visual>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
