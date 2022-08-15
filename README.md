@@ -463,6 +463,44 @@ $AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Messaging
+![image](https://user-images.githubusercontent.com/12811398/184646024-7cb557af-27bd-4483-a924-a834e0aa1d80.png)
+
+```powershell
+$xml = @"
+<toast launch="action=openThread&amp;threadId=92187">
+
+    <visual>
+        <binding template="ToastGeneric">
+            <text hint-maxLines="1">Jill Bender</text>
+            <text>Check out where we camped last weekend! It was incredible, wish you could have come on the backpacking trip!</text>
+            <image placement="appLogoOverride" hint-crop="circle" src="https://unsplash.it/64?image=1027"/>
+            <image placement="hero" src="https://unsplash.it/360/180?image=1043"/>
+        </binding>
+    </visual>
+
+    <actions>
+
+        <input id="textBox" type="text" placeHolderContent="reply"/>
+
+        <action
+          content="Send"
+          imageUri="https://storage.googleapis.com/rppico.appspot.com/send.png"
+          hint-inputId="textBox"
+          activationType="background"
+          arguments="action=reply&amp;threadId=92187"/>
+
+    </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = 'Microsoft.WindowsTerminal_8wekyb3d8bbwe!App'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
