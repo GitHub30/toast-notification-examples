@@ -377,6 +377,35 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 [Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
 ```
 
+## Execute Python Script
+![image](https://user-images.githubusercontent.com/12811398/184744179-a55604dc-35fa-45ce-bfb4-82d8acb3eb65.png)
+
+```powershell
+$PSDefaultParameterValues['Out-File:Encoding'] = 'utf8'
+'import webbrowser; webbrowser.open("https://www.python.org")' > handler.pyw
+$xml = @"
+<toast>
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Hello World</text>
+      <text>This is a simple toast message</text>
+    </binding>
+  </visual>
+  
+  <actions>
+    <action content="Execute Python Script" activationType="protocol" arguments="$($PWD)\handler.pyw" />
+  </actions>
+
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 ## Long duration
 ![image](https://user-images.githubusercontent.com/12811398/184664978-1bd036ac-e208-440b-8685-8b68d04e6070.png)
 
