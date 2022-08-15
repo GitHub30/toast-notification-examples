@@ -607,6 +607,54 @@ $NotificationData.SequenceNumber = 2
 [Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier($AppId).Update($NotificationData, 'my_tag')
 ```
 
+## Reminder
+![image](https://user-images.githubusercontent.com/12811398/184656689-ac527ef2-63cb-453f-a6bc-40dbc58e4816.png)
+![image](https://user-images.githubusercontent.com/12811398/184656722-33bca4d1-9461-4bc6-acb2-fc3ac160682a.png)
+
+```powershell
+$xml = @"
+<toast launch="action=viewEvent&amp;eventId=1983" scenario="reminder">
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Adaptive Tiles Meeting</text>
+      <text>Conf Room 2001 / Building 135</text>
+      <text>10:00 AM - 10:30 AM</text>
+    </binding>
+  </visual>
+
+  <actions>
+    
+    <input id="snoozeTime" type="selection" defaultInput="15">
+      <selection id="1" content="1 minute"/>
+      <selection id="15" content="15 minutes"/>
+      <selection id="60" content="1 hour"/>
+      <selection id="240" content="4 hours"/>
+      <selection id="1440" content="1 day"/>
+    </input>
+
+    <action
+      activationType="system"
+      arguments="snooze"
+      hint-inputId="snoozeTime"
+      content=""/>
+
+    <action
+      activationType="system"
+      arguments="dismiss"
+      content=""/>
+    
+  </actions>
+  
+</toast>
+"@
+[void][Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+```
+
 # References
 
 https://github.com/kacos2000/Win10/blob/master/Notifications/readme.md
