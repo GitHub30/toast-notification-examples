@@ -377,6 +377,33 @@ $MediaPlayer.Source = [Windows.Media.Core.MediaSource]::CreateFromUri('C:\Users\
 $MediaPlayer.Play()
 ```
 
+## Speak
+![image](https://user-images.githubusercontent.com/12811398/184780608-d4d2dc26-a330-4b51-b122-741beec4ca94.png)
+
+```powershell
+$xml = @"
+<toast>
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Hello World</text>
+      <text>This is a simple toast message</text>
+    </binding>
+  </visual>
+
+  <audio silent="true"/>
+  
+</toast>
+"@
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]::New()
+$XmlDocument.loadXml($xml)
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($XmlDocument)
+
+Add-Type -AssemblyName System.speech
+([System.Speech.Synthesis.SpeechSynthesizer]::New()).Speak('Hello world')
+```
+
 ## Open link
 ![image](https://user-images.githubusercontent.com/12811398/184736015-b54756d0-d521-4193-afea-d459e3a88f43.png)
 
