@@ -1015,6 +1015,51 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 ```
 
 ## Listening to events
+
+```powershell
+Invoke-WebRequest https://github.com/GitHub30/PoshWinRT/releases/download/1.2/PoshWinRT.dll -OutFile PoshWinRT.dll
+
+$xml = @"
+<toast>
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Hello World</text>
+      <text>This is a simple toast message</text>
+    </binding>
+  </visual>
+  
+  <actions>
+    <input id="textBox" type="text"/>
+    <action content="Send" activationType="system" arguments="dismiss" />
+  </actions>
+
+</toast>
+"@
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument, Windows.Data.Xml.Dom.XmlDocument, ContentType = WindowsRuntime]::New()
+$XmlDocument.loadXml($xml)
+$toast = [Windows.UI.Notifications.ToastNotification, Windows.UI.Notifications, ContentType = WindowsRuntime]::New($XmlDocument)
+
+function WrapToastEvent {
+  param($target, $eventName)
+
+  Add-Type -Path PoshWinRT.dll
+  $wrapper = new-object "PoshWinRT.EventWrapper[Windows.UI.Notifications.ToastNotification,System.Object]"
+  $wrapper.Register($target, $eventName)
+}
+
+Register-ObjectEvent -InputObject (WrapToastEvent $toast 'Activated') -EventName FireEvent -Action {
+  Write-Host arguments:, $args[1].Result.arguments
+  Write-Host textBox:, $args[1].Result.userinput['textBox']
+}
+
+$AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershell.exe'
+[Windows.UI.Notifications.ToastNotificationManager, Windows.UI.Notifications, ContentType = WindowsRuntime]::CreateToastNotifier($AppId).Show($toast)
+```
+
+![スクリーンショット 2022-08-18 133524](https://user-images.githubusercontent.com/12811398/185521954-fc59d0b8-fcd2-4859-a30e-67c2b8851931.png)
+
+
 https://github.com/PowerShell/PowerShell/issues/2181
 
 # References
