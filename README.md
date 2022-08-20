@@ -1016,6 +1016,55 @@ $AppId = '{1AC14E77-02E7-4E5D-B744-2EB1AE5198B7}\WindowsPowerShell\v1.0\powershe
 
 ## Listening to events
 
+`$PSVersionTable`
+
+### PowerShell 7.1
+
+```powershell
+Invoke-WebRequest https://github.com/Windos/BurntToast/raw/main/BurntToast/lib/Microsoft.Windows.SDK.NET/WinRT.Runtime.dll -OutFile WinRT.Runtime.dll
+Add-Type -Path WinRT.Runtime.dll
+Invoke-WebRequest https://github.com/Windos/BurntToast/raw/main/BurntToast/lib/Microsoft.Windows.SDK.NET/Microsoft.Windows.SDK.NET.dll -OutFile Microsoft.Windows.SDK.NET.dll
+Add-Type -Path Microsoft.Windows.SDK.NET.dll
+
+$xml = @"
+<toast>
+  
+  <visual>
+    <binding template="ToastGeneric">
+      <text>Hello World</text>
+      <text>This is a simple toast message</text>
+    </binding>
+  </visual>
+  
+  <actions>
+    <input id="textBox" type="text"/>
+    <action content="Send" activationType="system" arguments="dismiss" />
+  </actions>
+
+</toast>
+"@
+$XmlDocument = [Windows.Data.Xml.Dom.XmlDocument]::New()
+$XmlDocument.loadXml($xml)
+$toast = [Windows.UI.Notifications.ToastNotification]::New($XmlDocument)
+
+Register-ObjectEvent -InputObject $toast -EventName Activated -Action {
+  Write-Host $Event.SourceArgs.Arguments
+  Write-Host $Event.SourceArgs.UserInput.Value
+}
+
+[Windows.UI.Notifications.ToastNotificationManager]::CreateToastNotifier().Show($toast)
+```
+
+https://github.com/PowerShell/PowerShell/issues/13042#issuecomment-653357546
+
+https://toastit.dev/2020/08/08/actionable/
+
+You can install the latest PowerShell in the Microsoft store
+
+![スクリーンショット 2022-08-19 125139.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/208363/76965774-2fe8-d2e0-5b56-8c122154528f.png)
+
+### PowerShell 5.1
+
 ```powershell
 Invoke-WebRequest https://github.com/GitHub30/PoshWinRT/releases/download/1.2/PoshWinRT.dll -OutFile PoshWinRT.dll
 
